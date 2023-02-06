@@ -1,0 +1,45 @@
+// 7in1 - Used for resets, clearfix, low level basics, styles for HTML and Body elements
+/*Project reset*/
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; /* forcing inheritence*/
+}
+
+// Order of RESPONSIVE DESIGN
+// Base + typography > general layout + grid > page layout > componets
+
+html {
+  /* used for rem and changing this and using media queries is best way for responsivnes*/
+  font-size: 62.5%; /* Best to use with percentages and default browser font size which is 16px. This defines what 1 rem is!!! */
+  // 1Rem = 10px; 10px/16 = 62.5%
+
+  //ALWAYS THE LARGER ONES BEFORE SMALLER ONES QUERIES
+
+  // order matters
+  @include respond(tab-land) {
+    font-size: 56.25%; //1rem = 9px 9/16= 56.25%
+  }
+
+  @include respond(tab-port) {
+    font-size: 50%; //1rem = 8px 8/16= 50%
+  }
+
+  // @include respond(phone) {
+  //   font-size: 30%; //1rem = 8px 8/16= 50%
+  // }
+
+  @include respond(big-desktop) {
+    font-size: 65%; //1rem = 12px 12/16 = 75%
+  }
+}
+
+body {
+  box-sizing: border-box;
+  padding: 3rem;
+  @include respond(tab-port) {
+    padding: 0;
+  }
+}

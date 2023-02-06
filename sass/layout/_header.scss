@@ -1,0 +1,56 @@
+.header {
+  /* 95% size of viewport*/
+  // height: 95vh; changed later on to 85 based on support function for browsers
+  height: 85vh;
+  /*Linear gradient s opacity color dokaze spravit pekne priehladne obrazky */
+  background-image: linear-gradient(
+      to right,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(../img/hero-small.jpg);
+  background-size: cover; /* whatever the widht it will try to fit the element */
+  background-position: top;
+  position: relative;
+
+  @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0, 0)) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    height: 95vh;
+  }
+  //if higher than 192dpi then this shit happens.
+  // , sign is like OR in the statement
+  @media (min-resolution: 192dpi) and (min-width: 37.5em), (min-width: 125em) {
+    background-image: linear-gradient(
+        to right,
+        rgba($color-secondary-light, 0.8),
+        rgba($color-secondary-dark, 0.8)
+      ),
+      url(../img/hero.jpg);
+  }
+
+  @include respond(phone) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
+
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo {
+    height: 3.5rem;
+  }
+
+  &__text-box {
+    /* centering stuff inside of div*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* posunie div o 50 percen svojej sirky a 50 percent svojej vysky +- urcuje hore dole dolava doprava*/
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}

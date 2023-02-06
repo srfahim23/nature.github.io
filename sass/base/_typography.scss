@@ -1,0 +1,104 @@
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* font-size: 16px; */
+  line-height: 1.7; /*1.7 times bigger than pre-defined line height*/
+  color: $color-grey-dark;
+}
+
+.heading-primary {
+  color: $color-white;
+  text-transform: uppercase;
+
+  /* Fixes bug with shaking in animations */
+  backface-visibility: hidden; /*  If back part of an object is visible for user*/
+  margin-bottom: 6rem;
+
+  &--main {
+    /* display block creates break line and they take max space which is available*/
+    display: block;
+    font-size: 6rem;
+    font-weight: 400; /*hrubka pisma*/
+    letter-spacing: 3.5rem;
+
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out; /*urcuje ako prebiehe animacia, napriklad pomalsie alebo rychlejsie*/
+    /*animation-delay: 0.5s;*/
+    /*animation-iteration-count:3;*/
+
+    @include respond(phone) {
+      letter-spacing: 1rem;
+      font-size: 5rem;
+    }
+  }
+
+  &--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+
+    animation-name: moveInRight;
+    animation-duration: 1s;
+    /*	animation-delay: 0.5s;*/
+
+    @include respond(phone) {
+      letter-spacing: 0.5rem;
+      font-size: 5rem;
+    }
+  }
+}
+
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block; //only takes space that it needs, laso sets content as text so that for exampel text center can be used for this content
+  //How to set nice gradient for heading - color transfer
+  background-image: linear-gradient(
+    to right,
+    $color-primary-light,
+    $color-primary-dark
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 0.2rem;
+  transition: 0.2s;
+
+  @include respond(tab-port) {
+    font-size: 3rem;
+  }
+
+  @include respond(phone) {
+    font-size: 2.5rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  &:hover {
+    transform: skewY(2deg) skewX(8deg); //in degrees, makes funny stretch animation;
+    text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.2); //very nice light shadow for white backgrounds
+  }
+}
+
+.heading-tertiary {
+  font-size: $default-font-size;
+  font-weight: 700;
+  text-transform: uppercase;
+  @include respond(phone) {
+    padding: 0 3rem;
+    text-align: center;
+  }
+}
+
+.paragraph {
+  font-size: $default-font-size;
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+  @include respond(phone) {
+    padding: 0 3rem;
+    text-align: justify;
+  }
+}

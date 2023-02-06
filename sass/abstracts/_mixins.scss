@@ -1,0 +1,55 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//MEDIA QUERY MANAGER
+/*
+0-600px - phone
+600-900px - tablet portrait mode
+900-1200px - tablet landscape mode
+1200-1800px - pc [norml styles apply here]
+>1800px - large pc
+
+$breakpoint argument choices:
+-phone
+-tab-port
+-big-desktop
+*/
+
+//rem and ems are not affected by font size of root. 1 rem is always equal to browser default - 16px
+//rems fail in some browsers thats why we are using ems
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 37.5em) {
+      //600px /16 = 37.5em
+      @content;
+    }
+  }
+  @if $breakpoint == tab-port {
+    @media (max-width: 56.25em) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    @media (max-width: 75em) {
+      @content;
+    }
+  }
+  @if $breakpoint == big-desktop {
+    @media (min-width: 112.5em) {
+      @content;
+    }
+  }
+}

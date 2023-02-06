@@ -1,0 +1,82 @@
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba($color-black, 0.1); //0 x 3rem y direction and 6rem - blur with specific color
+  border-color: $color-white;
+  border-radius: 3px; //standard simple rounded corners
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: $default-font-size;
+  transform: skewX(-12deg);
+  position: relative;
+  background-color: rgba($color-white, 0.6);
+
+  @include respond(tab-port) {
+    width: 100%;
+    padding: 4rem;
+    padding-left: 7rem;
+  }
+
+  @include respond(phone) {
+    transform: skewX(0);
+  }
+  &__shape {
+    width: 15rem;
+    height: 15rem;
+    float: left;
+    shape-outside: circle(
+      50% at 50% 50%
+    ); //radius 50% = half of the the element, and center is at 50 50 meaning that it is in the
+    //margin-right: 3rem; // not good with floated elements
+    transform: translateX(-3rem) skewX(12deg); // transform is beeter with floated elemetns
+    overflow: hidden;
+    @include respond(phone) {
+      transform: translateX(-3rem) skewX(0);
+    }
+
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+      clip-path: circle(50% at 50% 50%);
+      width: 15rem;
+      height: 15rem;
+    }
+  }
+
+  &__image {
+    height: 100%;
+    transform: translateX(-4rem) scale(1.4);
+    backface-visibility: hidden;
+    transition: all 0.5s;
+  }
+
+  &__text {
+    transform: skewX(12deg);
+    @include respond(phone) {
+      transform: skewX(0);
+    }
+  }
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    color: $color-white;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.5s;
+    backface-visibility: hidden;
+  }
+
+  &:hover &__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover &__image {
+    transform: translateX(-4rem) scale(1);
+    // make image a bit darker and blurry
+    filter: blur(3px) brightness(80%);
+  }
+}
